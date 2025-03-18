@@ -1,21 +1,12 @@
-// routes/teacherRoutes.js
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const teacherController = require('../controllers/teacherController');
+const teacherController = require("../controllers/teacherController");
+const { authenticateUser, authorizeRole } = require("../middleware/authMiddleware");
 
-// Lấy danh sách giảng viên
-router.get('/teachers', teacherController.getAllTeachers);
+// Lấy danh sách giảng viên - Chỉ PĐT có quyền xem
+router.get("/", authenticateUser, authorizeRole("PDT"), teacherController.getAllTeachers);
 
-// Lấy 1 giảng viên theo ma_gv
-router.get('/teachers/:ma_gv', teacherController.getTeacherById);
-
-// Tạo mới giảng viên
-router.post('/teachers', teacherController.createTeacher);
-
-// Cập nhật thông tin giảng viên
-router.put('/teachers/:ma_gv', teacherController.updateTeacher);
-
-// Xóa giảng viên
-router.delete('/teachers/:ma_gv', teacherController.deleteTeacher);
+// Lấy thông tin giảng viên - GV và PĐT được xem
+router.get("/:id", authenticateUser, authorizeRole("PDT", "GV"), teacherController.getTeacherById);
 
 module.exports = router;

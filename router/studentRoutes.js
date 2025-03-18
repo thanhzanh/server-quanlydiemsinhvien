@@ -1,26 +1,21 @@
-// routes/studentRoutes.js
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const studentController = require('../controllers/studentController');
+const studentController = require("../controllers/studentController");
+const { authenticateUser, authorizeRole } = require("../middleware/authMiddleware");
 
-// Trang chủ (tùy chọn)
-router.get('/', (req, res) => {
-  res.send('Trang chủ Quản lý Sinh viên');
-});
+// Lấy danh sách sinh viên (PĐT và giảng viên có quyền)
+router.get("/", authenticateUser, authorizeRole("PDT", "giangvien"), studentController.getAllStudents);
 
-// Lấy danh sách sinh viên
-router.get('/students', studentController.getAllStudents);
+// Lấy thông tin một sinh viên (Sinh viên chỉ xem được thông tin của mình)
+router.get("/:id", authenticateUser, studentController.getStudentById);
 
-// Lấy 1 sinh viên
-router.get('/students/:id', studentController.getStudentById);
+// Thêm sinh viên (Chỉ PĐT)
+router.post("/", authenticateUser, authorizeRole("PDT"), studentController.createStudent);
 
-// Tạo mới sinh viên
-router.post('/students', studentController.createStudent);
+// Cập nhật thông tin sinh viên (Chỉ PĐT)
+router.put("/:id", authenticateUser, authorizeRole("PDT"), studentController.updateStudent);
 
-// Cập nhật sinh viên
-router.put('/students/:id', studentController.updateStudent);
-
-// Xóa sinh viên
-router.delete('/students/:id', studentController.deleteStudent);
+// Xóa sinh viên (Chỉ PĐT)
+router.delete("/:id", authenticateUser, authorizeRole("PDT"), studentController.deleteStudent);
 
 module.exports = router;

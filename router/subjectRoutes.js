@@ -1,21 +1,12 @@
-// routes/subjectRoutes.js
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const subjectController = require('../controllers/subjectController');
+const subjectController = require("../controllers/subjectController");
+const { authenticateUser, authorizeRole } = require("../middleware/authMiddleware");
 
-// Lấy danh sách môn học
-router.get('/subjects', subjectController.getAllSubjects);
+// Lấy danh sách môn học - GV và PĐT có thể xem
+router.get("/", authenticateUser, authorizeRole("PDT", "GV"), subjectController.getAllSubjects);
 
-// Lấy 1 môn học theo ma_mh
-router.get('/subjects/:ma_mh', subjectController.getSubjectById);
-
-// Tạo mới môn học
-router.post('/subjects', subjectController.createSubject);
-
-// Cập nhật thông tin môn học
-router.put('/subjects/:ma_mh', subjectController.updateSubject);
-
-// Xóa môn học
-router.delete('/subjects/:ma_mh', subjectController.deleteSubject);
+// Lấy thông tin môn học
+router.get("/:id", authenticateUser, subjectController.getSubjectById);
 
 module.exports = router;

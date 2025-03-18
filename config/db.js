@@ -1,18 +1,16 @@
-// db.js
 
-// db.js
 
-const mysql = require('mysql2');
-
+const mysql = require("mysql2/promise"); // Đúng, sử dụng phiên bản có hỗ trợ Promise
+require("dotenv").config();
 const pool = mysql.createPool({
-  host: '127.0.0.1',       // Địa chỉ host MySQL (thường là 'localhost')
-  user: 'root',            // Tên người dùng MySQL của bạn
-  password: 'Kiet123@', // Mật khẩu MySQL của bạn
-  database: 'diem_SinhVien', // Tên cơ sở dữ liệu bạn muốn kết nối
-  waitForConnections: true, // Chờ kết nối khi pool hết kết nối hiện có
-  connectionLimit: 10,      // Số lượng kết nối tối đa trong pool
+  host: '127.0.0.1',      
+  user: 'root',         
+  password: 'Kiet123@', 
+  database: 'diem_SinhVien',
+  waitForConnections: true, 
+  connectionLimit: 10,      
   queueLimit: 0,
-   port: 3306       // Không giới hạn hàng đợi khi pool đầy
+   port: 3306      
 });
 
 // Kiểm tra kết nối
@@ -21,7 +19,7 @@ pool.getConnection((err, connection) => {
     console.error('Kết nối MySQL thất bại:', err);
   } else {
     console.log('Kết nối MySQL thành công qua Pool');
-    connection.release(); // Giải phóng connection sau khi kiểm tra
+    connection.release(); 
   }
 });
 

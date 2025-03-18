@@ -43,7 +43,7 @@ module.exports = {
     `;
     pool.query(sql, [ma_sv, ho_ten, ngay_sinh, gioi_tinh, email, ma_lop, id], (err, result) => {
       if (err) return callback(err, null);
-      callback(null, result.affectedRows); // affectedRows = 0 nếu không tìm thấy
+      callback(null, result.affectedRows); 
     });
   },
 

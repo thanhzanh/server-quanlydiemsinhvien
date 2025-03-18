@@ -1,21 +1,28 @@
-const express = require('express');
+const express = require("express");
+const cors = require("cors");
+require("dotenv").config();
+
 const app = express();
 
-// Middleware xử lý JSON
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(cors());
 
-// Import các route
-const studentRoutes = require('./router/studentRoutes');
-const teacherRoutes = require('./router/teacherRoutes');
-const subjectRoutes = require('./router/teacherRoutes');
+// Import routes
+const authRoutes = require("./router/authRoutes");
+const studentRoutes = require("./router/studentRoutes");
+const teacherRoutes = require("./router/teacherRoutes");
+const subjectRoutes = require("./router/subjectRoutes");
+const scoreRoutes = require("./router/scoreRoutes");
 
-app.use('/', studentRoutes);
-app.use('/', teacherRoutes);
-app.use('/', subjectRoutes);
+// Định tuyến API
+app.use("/api/auth", authRoutes);
+app.use("/api/students", studentRoutes);
+app.use("/api/teachers", teacherRoutes);
+app.use("/api/subjects", subjectRoutes);
+app.use("/api/scores", scoreRoutes);
 
 // Khởi động server
-const port = 3000;
-app.listen(port, () => {
-  console.log(`Server đang chạy tại http://localhost:${port}`);
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`Server đang chạy tại http://localhost:${PORT}`);
 });
