@@ -1,6 +1,14 @@
-const subjectRoute = require('./subject.route');
+const accountRoute = require('./account.route');
+const teacherRoute = require('./teacher.route');
+const classSubjectRoute = require('./classSubject.route');
 
 module.exports = (app) => {
 
-    app.use('/api/subjects', subjectRoute);
+
+    app.use('/api/login', accountRoute);
+
+    app.use('/api/gv', teacherRoute);
+
+    app.use('/api/class-subject', classSubjectRoute);
+
 };
