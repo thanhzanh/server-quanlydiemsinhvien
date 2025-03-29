@@ -15,6 +15,8 @@ module.exports = {
   // Lấy thông tin 1 môn học theo ma_mh
   getSubjectById: async (req, res) => {
     const ma_mh = req.params.ma_mh;
+    console.log(ma_mh);
+    
     try {
       const subject = await subjectModel.getById(ma_mh);
       if (!subject) return res.status(404).json({ message: 'Không tìm thấy môn học' });

@@ -4,7 +4,7 @@ const studentController = require("../controllers/studentController");
 const { authenticateUser, authorizeRole } = require("../middleware/authMiddleware");
 
 // Lấy danh sách sinh viên (PĐT và giảng viên có quyền)
-router.get("/", authenticateUser, authorizeRole("PDT", "giangvien"), studentController.getAllStudents);
+router.get("/", authenticateUser, authorizeRole("PDT", "GV"), studentController.getAllStudents);
 
 // Lấy thông tin một sinh viên (Sinh viên chỉ xem được thông tin của mình)
 router.get("/:id", authenticateUser, studentController.getStudentById);
@@ -16,6 +16,9 @@ router.post("/", authenticateUser, authorizeRole("PDT"), studentController.creat
 router.put("/:id", authenticateUser, authorizeRole("PDT"), studentController.updateStudent);
 
 // Xóa sinh viên (Chỉ PĐT)
+router.delete("/:id", authenticateUser, authorizeRole("PDT"), studentController.deleteStudent);
+
+// Xem diem sinh viên 
 router.delete("/:id", authenticateUser, authorizeRole("PDT"), studentController.deleteStudent);
 
 module.exports = router;

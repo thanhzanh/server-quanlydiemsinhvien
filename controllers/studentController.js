@@ -8,6 +8,7 @@ module.exports = {
       const students = await studentModel.getAll();
       res.json(students);
     } catch (err) {
+      console.error("Loi server", err);
       res.status(500).json({ error: err.message });
     }
   },
@@ -15,6 +16,7 @@ module.exports = {
   // Lấy thông tin 1 sinh viên theo id
   getStudentById: async (req, res) => {
     const id = parseInt(req.params.id);
+    
     try {
       const student = await studentModel.getById(id);
       if (!student)

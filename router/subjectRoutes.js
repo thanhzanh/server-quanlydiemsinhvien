@@ -7,6 +7,15 @@ const { authenticateUser, authorizeRole } = require("../middleware/authMiddlewar
 router.get("/", authenticateUser, authorizeRole("PDT", "GV"), subjectController.getAllSubjects);
 
 // Lấy thông tin môn học
-router.get("/:id", authenticateUser, subjectController.getSubjectById);
+router.get("/:ma_mh", authenticateUser, authorizeRole("PDT", "GV"), subjectController.getSubjectById);
+
+// Lấy thông tin môn học
+router.post("/", authenticateUser, authorizeRole("PDT"), subjectController.createSubject);
+
+// Lấy thông tin môn học
+router.put("/:ma_mh", authenticateUser, authorizeRole("PDT"), subjectController.updateSubject);
+
+// Lấy thông tin môn học
+router.delete("/:ma_mh", authenticateUser, authorizeRole("PDT"), subjectController.deleteSubject);
 
 module.exports = router;

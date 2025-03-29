@@ -134,14 +134,6 @@ module.exports = {
     try {
       const { ma_gv, ma_lop_mh } = req.params;
 
-      // Kiểm tra quyền hạn
-      if (req.user.role !== "GV" || req.user.ma_gv !== ma_gv) {
-        return res.status(403).json({
-            success: false,
-            message: "Bạn không có quyền xem điểm của lớp này",
-        });
-    }
-
       const scores = await teacherModel.getStudentScoresByClass(ma_gv, ma_lop_mh);
 
       if (scores.length === 0) {

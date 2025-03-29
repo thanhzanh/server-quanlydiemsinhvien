@@ -25,25 +25,29 @@ const getGiaoVienById = async (ma_gv) => {
 };
 
 // Tạo lớp môn học
-const createLopMonHoc = async(maLopMonHoc,maMonHoc, maGiaoVien, hocKy, namHoc) => {
-    const [rows] = await database.query("INSERT INTO lop_mon_hoc (ma_lop_mh, ma_mh, ma_gv, hoc_ky, nam_hoc) VALUES (?, ?, ?, ?, ?)",
-        [maLopMonHoc, maMonHoc, maGiaoVien, hocKy, namHoc]
+const createLopMonHoc = async(maLopMonHoc,maMonHoc, maGiaoVien, hocKy, namHoc, trong_so_cc, trong_so_gk, trong_so_ck, sinh_vien_toi_da) => {
+    const [rows] = await database.query("INSERT INTO lop_mon_hoc (ma_lop_mh, ma_mh, ma_gv, hoc_ky, nam_hoc, trong_so_cc, trong_so_gk, trong_so_ck, sinh_vien_toi_da) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+        [maLopMonHoc, maMonHoc, maGiaoVien, hocKy, namHoc, trong_so_cc, trong_so_gk, trong_so_ck, sinh_vien_toi_da]
     );
     return rows;
 };
 
 // Cập nhật lớp môn học
 const updateLopMonHoc = async(ma_lop_mh, data) => {
-    const { ma_mh, ma_gv, hoc_ky, nam_hoc } = data;
+    const { ma_mh, ma_gv, hoc_ky, nam_hoc, trong_so_cc, trong_so_gk, trong_so_ck, sinh_vien_toi_da } = data;
     const query =`
         UPDATE lop_mon_hoc 
         SET ma_mh = COALESCE(?, ma_mh), 
             ma_gv = COALESCE(?, ma_gv), 
             hoc_ky = COALESCE(?, hoc_ky), 
-            nam_hoc= COALESCE(?, nam_hoc) 
+            nam_hoc= COALESCE(?, nam_hoc),
+            trong_so_cc= COALESCE(?, trong_so_cc),
+            trong_so_gk= COALESCE(?, trong_so_gk), 
+            trong_so_ck= COALESCE(?, trong_so_ck), 
+            sinh_vien_toi_da= COALESCE(?, sinh_vien_toi_da)
         WHERE ma_lop_mh = ?
     `;
-    await database.query(query, [ma_mh, ma_gv, hoc_ky, nam_hoc, ma_lop_mh])
+    await database.query(query, [ma_mh, ma_gv, hoc_ky, nam_hoc, trong_so_cc, trong_so_gk, trong_so_ck, sinh_vien_toi_da, ma_lop_mh])
     return { ma_lop_mh, ...data };
 };
 
