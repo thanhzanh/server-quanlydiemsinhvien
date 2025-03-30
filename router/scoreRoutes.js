@@ -53,12 +53,17 @@ router.put(
 
 //  Cập nhật điểm (chỉ PĐT)
 router.put(
-  "/:id",
+  "/update/ma_sv/:ma_sv",
   authenticateUser,
   authorizeRole(["PDT"]),
-  scoreController.updateScore
+  scoreController.updateByMaSV
 );
-
+router.put(
+  "/update/:ma_sv/class/:ma_lop_mh",
+  authenticateUser,
+  authorizeRole(["PDT"]),
+  scoreController.updateByMaSVAndClass
+);
 //  Xóa điểm (chỉ PĐT)
 router.delete(
   "/:id",
