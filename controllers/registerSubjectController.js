@@ -11,7 +11,6 @@ const getRegistrations = async (req, res) => {
 
 const createRegistration = async (req, res) => {
   try {
-    console.log("Request body:", req.body); // Debug log
     const { ma_sv, ma_lop_mh } = req.body;
 
     // Kiểm tra nếu ma_sv từ token khác với ma_sv trong request
@@ -97,10 +96,24 @@ const deleteRegistration = async (req, res) => {
   }
 };
 
+const getSubjectsByDepartment = async (req, res) => {
+  const { ma_bo_mon } = req.params;
+  try {
+    const [monHoc] = await pool.execute(
+      "SELECT * FROM mon_hoc WHERE ma_bo_mon = ?",
+      [ma_bo_mon]
+    );
+    res.json(monHoc);
+  } catch (error) {
+    res.status(500).json({ message: "Lỗi lấy danh sách môn học", error });
+  }
+};
+
 
 module.exports = {
   getRegistrations,
   createRegistration,
   updateRegistration,
   deleteRegistration,
+  getSubjectsByDepartment
 };

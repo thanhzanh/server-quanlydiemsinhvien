@@ -19,6 +19,6 @@ router.put("/:id", authenticateUser, authorizeRole("PDT"), studentController.upd
 router.delete("/:id", authenticateUser, authorizeRole("PDT"), studentController.deleteStudent);
 
 // Xem diem sinh viên 
-router.delete("/:id", authenticateUser, authorizeRole("PDT"), studentController.deleteStudent);
+router.delete("/:id", authenticateUser, authorizeRole("PDT"), studentController.deleteStudent); 
 
 module.exports = router;

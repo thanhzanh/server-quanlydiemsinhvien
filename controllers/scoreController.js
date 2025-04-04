@@ -14,6 +14,7 @@ exports.getAllScores = async (req, res) => {
 // Lấy điểm của 1 sinh viên - SV chỉ được xem của mình
 exports.getStudentScore = async (req, res) => {
   const { ma_sv } = req.params;
+  
   try {
     const result = await Score.getByStudentId(ma_sv);
     res.json(result);

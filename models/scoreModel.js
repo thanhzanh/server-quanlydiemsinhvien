@@ -109,7 +109,7 @@ const ScoreModel = {
     const { diem_cc, diem_gk, diem_ck } = data;
     const sql = `
       UPDATE diem
-      SET diem_cc = ?, diem_gk = ?, diem_ck = ?, 
+      SET diem_cc = ?, diem_gk = ?, diem_ck = ?
       WHERE id = ?
     `;
     const [result] = await pool.query(sql, [diem_cc, diem_gk, diem_ck, id]);

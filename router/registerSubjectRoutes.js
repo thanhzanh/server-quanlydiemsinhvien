@@ -1,5 +1,5 @@
 const express = require("express");
-const { getRegistrations, createRegistration, updateRegistration, deleteRegistration } = require("../controllers/registerSubjectController");
+const { getRegistrations, createRegistration, updateRegistration, deleteRegistration, getSubjectsByDepartment } = require("../controllers/registerSubjectController");
 const router = express.Router();
 const { authenticateUser, authorizeRole } = require("../middleware/authMiddleware");
 
@@ -12,6 +12,6 @@ router.put("/:ma_sv/:ma_lop_mh", authenticateUser, authorizeRole(["SV"]), update
 // Xóa đăng ký môn học
 router.delete("/:ma_sv/:ma_lop_mh", authenticateUser, authorizeRole(["SV"]), deleteRegistration);
 
-console.log("Registration routes registered for /api/registration");
+router.get("/mon-hoc/:ma_bo_mon", authenticateUser, getSubjectsByDepartment);
 
 module.exports = router;

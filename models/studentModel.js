@@ -5,7 +5,13 @@ module.exports = {
   // Lấy tất cả sinh viên
   getAll: async () => {
     try {
-      const [rows] = await pool.query("SELECT * FROM sinh_vien"); // Sử dụng await
+      // const [rows] = await pool.query("SELECT * FROM sinh_vien"); // Sử dụng await
+      const [rows] = await pool.query(`
+        SELECT id, ma_sv, ho_ten, 
+               DATE_FORMAT(ngay_sinh, '%d/%m/%Y') AS ngay_sinh, 
+               gioi_tinh, email, ma_lop 
+        FROM sinh_vien
+      `);
       return rows;
     } catch (error) {
       throw error;

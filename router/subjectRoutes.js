@@ -9,13 +9,13 @@ router.get("/", authenticateUser, authorizeRole("PDT", "GV"), subjectController.
 // Lấy thông tin môn học
 router.get("/:ma_mh", authenticateUser, authorizeRole("PDT", "GV"), subjectController.getSubjectById);
 
-// Lấy thông tin môn học
+// Thêm môn học
 router.post("/", authenticateUser, authorizeRole("PDT"), subjectController.createSubject);
 
-// Lấy thông tin môn học
+// Cập nhậ môn học
 router.put("/:ma_mh", authenticateUser, authorizeRole("PDT"), subjectController.updateSubject);
 
-// Lấy thông tin môn học
+// Xóa môn học
 router.delete("/:ma_mh", authenticateUser, authorizeRole("PDT"), subjectController.deleteSubject);
 
 module.exports = router;
