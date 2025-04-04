@@ -76,22 +76,37 @@ exports.updateScoresByClass = async (req, res) => {
   }
 };
 
-// Cập nhật điểm (chỉ PĐT)
-exports.updateScore = async (req, res) => {
-  const { id } = req.params;
+
+exports.updateByMaSV = async (req, res) => {
+  const { ma_sv } = req.params;
   const { diem_cc, diem_gk, diem_ck } = req.body;
 
   try {
-    const affected = await Score.update(id, { diem_cc, diem_gk, diem_ck });
+    const affected = await Score.updateByMaSV(ma_sv, { diem_cc, diem_gk, diem_ck });
     if (affected === 0) {
-      return res.status(404).json({ message: "Không tìm thấy bản ghi để cập nhật" });
+      return res.status(404).json({ message: "Không tìm thấy sinh viên để cập nhật điểm" });
     }
-
-    res.json({ message: "Cập nhật điểm thành công" });
+    res.json({ message: "Cập nhật điểm theo mã SV thành công" });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 };
+// Cập nhật điểm theo mã sinh viên và mã lớp môn học
+exports.updateByMaSVAndClass = async (req, res) => {
+  const { ma_sv, ma_lop_mh } = req.params;
+  const { diem_cc, diem_gk, diem_ck } = req.body;
+
+  try {
+    const affected = await Score.updateByMaSVAndClass(ma_sv, ma_lop_mh, { diem_cc, diem_gk, diem_ck });
+    if (affected === 0) {
+      return res.status(404).json({ message: "Không tìm thấy điểm cần cập nhật" });
+    }
+    res.json({ message: "Cập nhật điểm theo mã SV và lớp môn học thành công" });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
 
 // Xóa điểm (chỉ PĐT)
 exports.deleteScore = async (req, res) => {

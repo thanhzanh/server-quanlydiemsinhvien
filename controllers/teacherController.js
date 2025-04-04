@@ -13,8 +13,8 @@ module.exports = {
   },
 
   // Lấy thông tin 1 giảng viên theo ma_gv
-  getTeacherById: async (req, res) => {
-    const ma_gv = req.params.ma_gv;
+  getTeacherById : async (req, res) => {
+    const ma_gv = req.params.id; // 
     try {
       const teacher = await teacherModel.getById(ma_gv);
       if (!teacher)
@@ -24,6 +24,7 @@ module.exports = {
       res.status(500).json({ error: err.message });
     }
   },
+  
 
   // Tạo mới giảng viên
   createTeacher: async (req, res) => {

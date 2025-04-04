@@ -115,6 +115,28 @@ const ScoreModel = {
     const [result] = await pool.query(sql, [diem_cc, diem_gk, diem_ck, id]);
     return result.affectedRows;
   },
+  // Cập nhật điểm theo mã sinh viên
+updateByMaSV: async (ma_sv, data) => {
+  const { diem_cc, diem_gk, diem_ck } = data;
+  const sql = `
+    UPDATE diem
+    SET diem_cc = ?, diem_gk = ?, diem_ck = ?
+    WHERE ma_sv = ?
+  `;
+  const [result] = await pool.query(sql, [diem_cc, diem_gk, diem_ck, ma_sv]);
+  return result.affectedRows;
+},
+// Cập nhật điểm theo mã sinh viên và mã lớp môn học
+updateByMaSVAndClass: async (ma_sv, ma_lop_mh, data) => {
+  const { diem_cc, diem_gk, diem_ck } = data;
+  const sql = `
+    UPDATE diem
+    SET diem_cc = ?, diem_gk = ?, diem_ck = ?
+    WHERE ma_sv = ? AND ma_lop_mh = ?
+  `;
+  const [result] = await pool.query(sql, [diem_cc, diem_gk, diem_ck, ma_sv, ma_lop_mh]);
+  return result.affectedRows;
+},
 
   // Xóa điểm
   delete: async (id) => {
