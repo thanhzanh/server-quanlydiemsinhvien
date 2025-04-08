@@ -17,6 +17,7 @@ const authenticateUser = (req, res, next) => {
 
     try {
         const decoded = jwt.verify(token, SECRET_KEY);
+
         req.user = decoded;
         next();
     } catch (err) {
@@ -25,7 +26,7 @@ const authenticateUser = (req, res, next) => {
 };
 
 const authorizeRole = (roles) => {
-    return (req, res, next) => {
+    return (req, res, next) => {        
         if (!roles.includes(req.user.role)) {
             return res.status(403).json({ message: "Bạn không có quyền truy cập" });
         }

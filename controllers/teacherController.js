@@ -64,14 +64,15 @@ module.exports = {
 
   // Lấy danh sách lớp môn học của giảng viên dạy
   getDSLopMonHoc: async (req, res) => {
+
     try {
       const ma_gv = req.params.ma_gv;
-
+      
       // Kiểm tra nếu người dùng không phải GV hoặc không truy cập đúng mã GV của họ
-      if (req.user.role !== "GV" || req.user.ma_gv !== ma_gv) {
+      if (req.user.role === "GV" && req.user.ma_gv !== ma_gv) {
         return res.status(403).json({
-            success: false,
-            message: "Bạn không có quyền truy cập thông tin này",
+          success: false,
+          message: "Bạn không có quyền truy cập thông tin này",
         });
     }
 
@@ -105,10 +106,10 @@ module.exports = {
       const { ma_gv, ma_lop_mh } = req.params;
 
       // Kiểm tra quyền hạn
-      if (req.user.role !== "GV" || req.user.ma_gv !== ma_gv) {
+      if (req.user.role === "GV" && req.user.ma_gv !== ma_gv) {
         return res.status(403).json({
-            success: false,
-            message: "Bạn không có quyền truy cập danh sách sinh viên lớp này",
+          success: false,
+          message: "Bạn không có quyền truy cập thông tin này",
         });
     }
 
