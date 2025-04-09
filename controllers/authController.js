@@ -53,7 +53,7 @@ exports.login = async (req, res) => {
             { expiresIn: process.env.TOKEN_EXPIRE || "1h" }
         );
 
-        res.json({ token, role: user.role });
+        res.json({ token, role: user.role, magv: user.ma_gv, masv: user.ma_sv});
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
