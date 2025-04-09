@@ -5,6 +5,8 @@ const Score = require("../models/scoreModel");
 exports.getAllScores = async (req, res) => {
   try {
     const results = await Score.getAll();
+    console.log(results);
+    
     res.json(results);
   } catch (err) {
     res.status(500).json({ error: err.message });
