@@ -17,6 +17,7 @@ const subjectRoutes = require("./router/subjectRoutes");
 const registerSubjectRoutes = require("./router/registerSubjectRoutes");
 const scoreRoutes = require("./router/scoreRoutes");
 const classSubjectRoute = require('./router/classSubjectRoutes');
+const userRoute = require('./router/userRoutes');
 
 // Định tuyến API
 app.use("/api/auth", authRoutes);
@@ -26,6 +27,7 @@ app.use("/api/subjects", subjectRoutes);
 app.use('/api/register-subject', registerSubjectRoutes);
 app.use("/api/scores", scoreRoutes);
 app.use('/api/class-subject', classSubjectRoute);
+app.use('/api/users', userRoute);
 
 
 // Khởi động server

@@ -2,7 +2,7 @@ const database = require('../config/db');
 
 // Lấy danh sách lớp môn học
 const getAllClassSubject = async() => {
-    const [rows] = await database.query("SELECT ma_lop_mh, ma_mh, ma_gv, hoc_ky, nam_hoc FROM lop_mon_hoc");
+    const [rows] = await database.query("SELECT ma_lop_mh, ma_mh, ma_gv, hoc_ky, nam_hoc, trong_so_cc, trong_so_gk, trong_so_ck, sinh_vien_toi_da FROM lop_mon_hoc");
     return rows;
 };
 
