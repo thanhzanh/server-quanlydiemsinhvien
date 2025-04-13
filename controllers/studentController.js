@@ -15,7 +15,7 @@ module.exports = {
 
   // Lấy thông tin 1 sinh viên theo id
   getStudentById: async (req, res) => {
-    const ma_sv = parseInt(req.params.ma_sv);
+    const ma_sv = req.params.ma_sv;
     
     try {
       const student = await studentModel.getById(ma_sv);
