@@ -19,8 +19,8 @@ module.exports = {
   },
 
   // Lấy sinh viên theo ID (cột id trong bảng)
-  getById: async (id) => {
-    const [rows] = await pool.query("SELECT * FROM sinh_vien WHERE id = ?", [id]);
+  getById: async (ma_sv) => {
+    const [rows] = await pool.query("SELECT * FROM sinh_vien WHERE ma_sv = ?", [ma_sv]);
     return rows[0];
   },
 

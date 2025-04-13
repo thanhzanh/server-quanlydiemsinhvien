@@ -7,7 +7,7 @@ const { authenticateUser, authorizeRole } = require("../middleware/authMiddlewar
 router.get("/", authenticateUser, authorizeRole("PDT", "GV"), studentController.getAllStudents);
 
 // Lấy thông tin một sinh viên (Sinh viên chỉ xem được thông tin của mình)
-router.get("/:id", authenticateUser, studentController.getStudentById);
+router.get("/:ma_sv", authenticateUser, studentController.getStudentById);
 
 // Thêm sinh viên (Chỉ PĐT)
 router.post("/", authenticateUser, authorizeRole("PDT"), studentController.createStudent);

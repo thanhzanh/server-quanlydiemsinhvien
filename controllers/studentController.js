@@ -15,10 +15,10 @@ module.exports = {
 
   // Lấy thông tin 1 sinh viên theo id
   getStudentById: async (req, res) => {
-    const id = parseInt(req.params.id);
+    const ma_sv = parseInt(req.params.ma_sv);
     
     try {
-      const student = await studentModel.getById(id);
+      const student = await studentModel.getById(ma_sv);
       if (!student)
         return res.status(404).json({ message: "Không tìm thấy sinh viên" });
       res.json(student);
