@@ -9,6 +9,9 @@ const { authenticateUser, authorizeRole } = require("../middleware/authMiddlewar
 // Lấy danh sách tất cả lớp môn học (PĐT có quyền)
 router.get("/", authenticateUser, authorizeRole(["PDT"]), controller.getAllLopMonHoc);
 
+// Lấy danh sách tất cả lớp 
+router.get("/getAllClass", authenticateUser, authorizeRole(["PDT"]), controller.getAllLop);
+
 // Lấy thông tin lớp môn học theo mã lớp môn học (PĐT có quyền)
 router.get("/:ma_lop_mh", authenticateUser, authorizeRole(["PDT"]), controller.getLopMonHocById);
 

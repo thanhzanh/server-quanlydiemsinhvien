@@ -44,5 +44,6 @@ module.exports = {
     const sql = 'DELETE FROM mon_hoc WHERE ma_mh = ?';
     const [result] = await pool.query(sql, [ma_mh]);
     return result.affectedRows;
-  }
+  },
+
 };

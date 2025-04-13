@@ -149,3 +149,19 @@ module.exports.deleteMonHoc = async (req, res) => {
     }
 
 };
+
+module.exports.getAllLop = async (req, res) => {
+    
+    try {    
+        // Kiểm tra lớp có tồn tại không
+        const lop = await ClassSubject.getAllClass();
+        
+        res.status(200).json({
+            success: true,
+            data: lop
+        });                                     
+    } catch (error) {
+        return res.status(500).json({ success: false, message: "Lỗi server", error });
+    }
+
+};

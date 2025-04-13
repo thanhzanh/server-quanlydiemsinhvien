@@ -6,6 +6,12 @@ const getAllClassSubject = async() => {
     return rows;
 };
 
+// Lấy danh sách các lớp lớp
+const getAllClass = async() => {
+    const [rows] = await database.query("SELECT * FROM lop");
+    return rows;
+};
+
 // Lấy lớp môn học theo ma_lop_mh
 const getLopMonHocById = async (ma_lop_mh) => {
     const [rows] = await database.query("SELECT * FROM lop_mon_hoc WHERE ma_lop_mh = ?", [ma_lop_mh]);
@@ -57,4 +63,4 @@ const deleteLopMonHoc = async(ma_lop_mh) => {
     return true;
 };
 
-module.exports = { getAllClassSubject, getLopMonHocById, getMonHocById, getGiaoVienById, createLopMonHoc, updateLopMonHoc, deleteLopMonHoc };
+module.exports = { getAllClassSubject, getAllClass, getLopMonHocById, getMonHocById, getGiaoVienById, createLopMonHoc, updateLopMonHoc, deleteLopMonHoc };
