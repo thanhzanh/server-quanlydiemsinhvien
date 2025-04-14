@@ -6,6 +6,9 @@ const { authenticateUser, authorizeRole } = require("../middleware/authMiddlewar
 // Lấy danh sách môn học - GV và PĐT có thể xem
 router.get("/", authenticateUser, authorizeRole("PDT", "GV"), subjectController.getAllSubjects);
 
+// Lấy danh sách bộ môn
+router.get("/bo-mon/all", authenticateUser, authorizeRole("PDT"), subjectController.getAllBoMon);
+
 // Lấy thông tin môn học
 router.get("/:ma_mh", authenticateUser, authorizeRole("PDT", "GV"), subjectController.getSubjectById);
 

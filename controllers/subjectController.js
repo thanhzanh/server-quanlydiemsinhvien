@@ -12,6 +12,16 @@ module.exports = {
     }
   },
 
+  // Lấy danh sách môn học
+  getAllBoMon: async (req, res) => {
+    try {
+      const bomon = await subjectModel.getAllMaBoMon();
+      res.json(bomon);
+    } catch (err) {
+      res.status(500).json({ error: err.message });
+    }
+  },
+
   // Lấy thông tin 1 môn học theo ma_mh
   getSubjectById: async (req, res) => {
     const ma_mh = req.params.ma_mh;    

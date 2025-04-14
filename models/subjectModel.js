@@ -9,6 +9,13 @@ module.exports = {
     return results;
   },
 
+    // Lấy danh sách bộ môn
+    getAllMaBoMon: async () => {
+      const sql = "SELECT * FROM bo_mon";
+      const [results] = await pool.query(sql);
+      return results;
+    },
+
   // Lấy môn học theo mã môn học (ma_mh)
   getById: async (ma_mh) => {
     const sql = 'SELECT * FROM mon_hoc WHERE ma_mh = ?';
