@@ -7,7 +7,7 @@ module.exports = {
     const sql = "SELECT * FROM giang_vien";
     const [results] = await pool.query(sql);
     return results;
-  },
+  }, 
 
   // Lấy thông tin giảng viên theo mã giảng viên (ma_gv)
   getById: async (ma_gv) => {

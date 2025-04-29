@@ -43,14 +43,14 @@ const updateLopMonHoc = async(ma_lop_mh, data) => {
     const { ma_mh, ma_gv, hoc_ky, nam_hoc, trong_so_cc, trong_so_gk, trong_so_ck, sinh_vien_toi_da } = data;
     const query =`
         UPDATE lop_mon_hoc 
-        SET ma_mh = COALESCE(?, ma_mh), 
-            ma_gv = COALESCE(?, ma_gv), 
-            hoc_ky = COALESCE(?, hoc_ky), 
-            nam_hoc= COALESCE(?, nam_hoc),
-            trong_so_cc= COALESCE(?, trong_so_cc),
-            trong_so_gk= COALESCE(?, trong_so_gk), 
-            trong_so_ck= COALESCE(?, trong_so_ck), 
-            sinh_vien_toi_da= COALESCE(?, sinh_vien_toi_da)
+        SET ma_mh = ?, 
+            ma_gv = ?, 
+            hoc_ky = ?, 
+            nam_hoc= ?,
+            trong_so_cc= ?,
+            trong_so_gk= ?, 
+            trong_so_ck= ?, 
+            sinh_vien_toi_da= ?
         WHERE ma_lop_mh = ?
     `;
     await database.query(query, [ma_mh, ma_gv, hoc_ky, nam_hoc, trong_so_cc, trong_so_gk, trong_so_ck, sinh_vien_toi_da, ma_lop_mh])
